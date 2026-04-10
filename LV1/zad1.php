@@ -18,6 +18,7 @@
     <title>Zadatak1</title>
 </head>
 <body>
+        <a href="https://github.com/Miikki10/programiranje_web_aplikacija.git">GitHub repozitorij</a>
     <form>
         <label for="godine">Unesite svoje godine:</label>
         <input type="number" id="godine" name="godine" value="<?php echo isset($_GET['godine']) ? htmlspecialchars($_GET['godine']) : ''; ?>" required>

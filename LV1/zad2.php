@@ -5,6 +5,7 @@
     <title>Zadatak2</title>
 </head>
 <body>
+        <a href="https://github.com/Miikki10/programiranje_web_aplikacija.git">GitHub repozitorij</a>
     <form method="GET">
         <label>Ocjena 1:</label> <input type="number" step="0.1" name="ocjena1" required><br>
         <label>Ocjena 2:</label> <input type="number" step="0.1" name="ocjena2" required><br>

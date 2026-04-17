@@ -18,25 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Promjena boje pozadine</title>
-    <style>
-        body {
-            /* Dinamičko postavljanje boje pozadine putem PHP-a */
-            background-color: <?php echo htmlspecialchars($bojaPozadine); ?>;
-            font-family: Arial, sans-serif;
-            transition: background-color 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .kontejner {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-    </style>
+    <link rel="stylesheet" href="style1.css">
 </head>
 <body>
 

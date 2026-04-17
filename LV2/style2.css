@@ -1,0 +1,66 @@
+/* Stilovi za cijelu stranicu */
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+}
+
+/* Kontejner forme sa slike */
+.forma-kontejner { 
+    background-color: #fff;
+    border-bottom: 3px solid #553366; 
+    padding: 20px; 
+    width: 320px; 
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Polja za unos brojeva */
+input[type="number"] { 
+    width: 100%; 
+    padding: 10px; 
+    margin: 8px 0 18px 0; 
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Osigurava da padding ne širi polje */
+}
+
+/* Gumb za slanje */
+button { 
+    background-color: #333; 
+    color: white; 
+    padding: 12px 15px; 
+    border: none; 
+    cursor: pointer; 
+    text-transform: uppercase;
+    font-weight: bold;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Stilovi tablice */
+table { 
+    border-collapse: collapse; 
+    margin-top: 15px; 
+    background-color: #fff;
+}
+
+table, td { 
+    border: 1px solid #333; 
+}
+
+td { 
+    width: 60px; 
+    height: 35px; 
+}
+
+/* Opisi polja */
+label { 
+    color: #444; 
+    font-size: 0.95em; 
+    font-weight: bold;
+}

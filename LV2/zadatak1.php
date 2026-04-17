@@ -19,6 +19,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <title>Promjena boje pozadine</title>
     <link rel="stylesheet" href="style1.css">
+    <style>
+        body {
+            /* Dinamički dio ostaje ovdje jer PHP ne radi u .css datoteci */
+            background-color: <?php echo htmlspecialchars($bojaPozadine); ?>;
+        }
+    </style>
 </head>
 <body>
 

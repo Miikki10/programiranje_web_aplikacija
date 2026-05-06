@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <title>Unos Zaposlenika</title>
+    <style>
+        /* Kratki stil za bolju preglednost */
+        body { font-family: sans-serif; margin: 20px; }
+        form { margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; width: 300px; }
+        label { font-weight: bold; }
+        .github-link { margin-top: 20px; display: block; color: #0366d6; text-decoration: none; }
+        .github-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <h2>Unos novog zaposlenika</h2>
+
+    <!-- Forma šalje podatke PHP skripti -->
+    <form action="input.php" method="POST">
+        <label for="ime">Ime</label><br />
+        <input name="ime_zaposlenika" type="text" maxlength="32" required/><br /><br />
+
+        <label for="prezime">Prezime</label><br />
+        <input name="prezime_zaposlenika" type="text" maxlength="32" required/><br /><br />
+
+        <label for="oib">OIB</label><br />
+        <input name="OIB" type="number" required/><br /><br />
+
+        <label for="email">E-mail</label><br />
+        <input name="e_mail" type="email" maxlength="32" required/><br /><br />
+
+        <input name="submit" type="submit" value="Spremi u bazu" /> 
+    </form>
+
+    <hr>
+
+    <!-- Poveznica na tvoj GitHub repozitorij -->
+    <p>Projekt možete pronaći na GitHub-u:</p>
+    <a href="https://github.com/Miikki10/programiranje_web_aplikacija" class="github-link" target="_blank">
+        GitHub: Miikki10/programiranje_web_aplikacija
+    </a>
+
+</body>
+</html>

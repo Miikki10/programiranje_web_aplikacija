@@ -1,0 +1,211 @@
+/* --- RESET I OSNOVNI STILOVU --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background-color: #e6ecf0; /* Svjetlija sivo-plava pozadina za ugodniji blog izgled */
+    color: #222;
+}
+
+/* --- HEADER & LOGO --- */
+.main-header {
+    background-color: #ffffff;
+    padding: 15px 0;
+    text-align: center;
+    border-bottom: 4px solid #005cbf; /* Zagrebačka plava crta ispod logotipa */
+}
+
+.logo-text {
+    font-size: 38px;
+    font-weight: 900;
+    font-style: italic;
+    color: #005cbf; /* Prepoznatljiva plava boja */
+    letter-spacing: -1px;
+}
+
+/* --- NAVIGACIJA --- */
+.main-nav {
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+}
+
+.main-nav ul {
+    max-width: 1000px;
+    margin: 0 auto;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-nav li {
+    flex: 1;
+    text-align: center;
+}
+
+.main-nav a {
+    display: block;
+    padding: 12px 0;
+    color: #444;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    border-right: 1px solid #eee;
+}
+
+.main-nav li:last-child a {
+    border-right: none;
+}
+
+.main-nav a:hover {
+    background-color: #f9f9f9;
+    color: #005cbf;
+}
+
+/* --- GLAVNI KONTEJNER --- */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #ffffff; /* Čisto bijela unutar portala */
+    padding: 15px;
+}
+
+/* --- SEKCIJE I NASLOVI --- */
+.news-section {
+    background-color: #ffffff;
+    margin-bottom: 25px;
+    border: 1px solid #ddd;
+}
+
+.section-title {
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.section-title a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Zagrebačke tematske boje za rubrike */
+.title-vijesti {
+    background-color: #005cbf; /* Tamnoplava za glavne vijesti */
+}
+
+.title-sport {
+    background-color: #d32f2f; /* Crvena za sport (odličan kontrast plavoj i zelenoj) */
+}
+
+.title-kultur {
+    background-color: #2e7d32; /* Zrinjevačka zelena za kulturu i đir */
+}
+
+/* --- GRID I KARTICE --- */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 15px;
+}
+
+.news-card {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 10px 0;
+}
+
+/* Nadnaslovi (tagovi) unutar kartica */
+.card-tag {
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.tag-vijesti {
+    color: #005cbf;
+}
+
+.tag-sport {
+    color: #d32f2f;
+}
+
+.tag-kultur {
+    color: #2e7d32;
+}
+
+/* Naslovi vijesti */
+.card-heading {
+    font-size: 15px;
+    line-height: 1.3;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+}
+
+.card-heading:hover {
+    text-decoration: underline;
+    color: #005cbf;
+}
+
+/* --- FOOTER --- */
+.main-footer {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.footer-top {
+    background-color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    font-size: 11px;
+    color: #666;
+    border-top: 1px solid #ddd;
+}
+
+.footer-bottom {
+    background-color: #1a1a1a;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    font-size: 13px;
+}
+
+.footer-bottom a {
+    color: #005cbf;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* --- RESPONZIVNOST --- */
+@media (max-width: 768px) {
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+    }
+    
+    .main-nav a {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+    }
+}

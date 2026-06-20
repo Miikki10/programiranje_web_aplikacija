@@ -11,6 +11,11 @@ body {
     color: #222;
 }
 
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 /* --- HEADER & LOGO --- */
 .main-header {
     background-color: #ffffff;
@@ -99,7 +104,7 @@ body {
 }
 
 .title-sport {
-    background-color: #d32f2f; /* Crvena za sport (odličan kontrast plavoj i zelenoj) */
+    background-color: #d32f2f; /* Crvena za sport */
 }
 
 .title-kultur {
@@ -194,6 +199,81 @@ body {
     font-weight: bold;
 }
 
+
+/* --- ZAJEDNIČKI PRIKAZ ZA vijest.html I OBAVEZNI PHP PREDLOŽAK (skripta.php) --- */
+
+/* Glavni omotač članka */
+.single-news, 
+section[role="main"] {
+    padding: 10px 0;
+}
+
+/* Stil za nadnaslov / kategoriju članka */
+.single-tag, 
+section[role="main"] .category {
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #005cbf; /* Primarna boja za ispis kategorije */
+}
+
+/* Glavni naslov članka (h1) */
+.single-title, 
+section[role="main"] .title {
+    font-size: 32px;
+    margin-bottom: 15px;
+    line-height: 1.2;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Podaci o autoru i datumu unutar .row bloka u PHP-u */
+section[role="main"] .row p:not(.category):not(.title) {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+/* Kontejner za veliku sliku */
+.single-img-container, 
+section[role="main"] .slika {
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.single-img-container img, 
+section[role="main"] .slika img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* Blok s tekstom vijesti i paragrafi */
+.single-content, 
+section[role="main"] .about, 
+section[role="main"] .sadrzaj {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.single-content p, 
+section[role="main"] .about p, 
+section[role="main"] .sadrzaj p {
+    margin-bottom: 15px;
+}
+
+/* Istaknuti uvodni kratki sadržaj (Kratki sadržaj / .about) */
+.single-content .lead-paragraph, 
+section[role="main"] .about {
+    font-weight: bold;
+    font-size: 17px;
+    color: #111;
+}
+
+
 /* --- RESPONZIVNOST --- */
 @media (max-width: 768px) {
     .news-grid {
@@ -207,5 +287,11 @@ body {
     .main-nav a {
         border-right: none;
         border-bottom: 1px solid #eee;
+    }
+
+    /* Prilagodba veličine naslova na manjim ekranima */
+    .single-title, 
+    section[role="main"] .title {
+        font-size: 26px;
     }
 }

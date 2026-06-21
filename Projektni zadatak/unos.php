@@ -16,11 +16,11 @@
 
     <nav class="main-nav">
         <ul>
-            <li><a href="index.html">POČETNA</a></li>
+            <li><a href="index.php">POČETNA</a></li>
             <li><a href="#">ZG VIJESTI</a></li>
             <li><a href="#">ZG-SPORT</a></li>
             <li><a href="#">KULTURA & ĐIR</a></li>
-            <li><a href="unos.html">ADMINISTRACIJA</a></li>
+            <li><a href="unos.php">ADMINISTRACIJA</a></li>
         </ul>
     </nav>
 
@@ -55,6 +55,7 @@
                     <label for="category" style="display:block; font-weight:bold; margin-bottom: 5px;">Kategorija vijesti</label>
                     <div class="form-field">
                         <select name="category" id="category" class="form-field-textual" style="width: 100%; padding: 8px; border: 1px solid #ddd;">
+                            <option value="vijesti">ZG Vijesti</option>
                             <option value="sport">Sport</option>
                             <option value="kultura">Kultura</option>
                         </select>
@@ -70,7 +71,7 @@
 
                 <div class="form-item" style="margin-bottom: 15px;">
                     <label style="font-weight:bold;">
-                        <input type="checkbox" name="archive" value="da"> Spremiti u arhivu
+                        <input type="checkbox" name="archive" value="1"> Spremiti u arhivu (sakrij s naslovnice)
                     </label>
                 </div>
 

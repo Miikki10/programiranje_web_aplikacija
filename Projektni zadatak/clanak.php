@@ -47,10 +47,10 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     <nav class="main-nav">
         <ul>
             <li><a href="index.php">POČETNA</a></li>
-            <li><a href="#">ZG VIJESTI</a></li>
-            <li><a href="#">ZG-SPORT</a></li>
-            <li><a href="#">KULTURA & ĐIR</a></li>
-            <li><a href="unos.php">ADMINISTRACIJA</a></li>
+            <li><a href="kategorija.php?id=vijesti" class="<?php echo (isset($category) && $category == 'vijesti') ? 'active' : ''; ?>">ZG VIJESTI</a></li>
+            <li><a href="kategorija.php?id=sport" class="<?php echo (isset($category) && $category == 'sport') ? 'active' : ''; ?>">ZG-SPORT</a></li>
+            <li><a href="kategorija.php?id=kultura" class="<?php echo (isset($category) && $category == 'kultura') ? 'active' : ''; ?>">KULTURA & ĐIR</a></li>
+            <li><a href="administrator.php">ADMINISTRACIJA</a></li>
         </ul>
     </nav>
 

@@ -273,6 +273,43 @@ section[role="main"] .about {
     color: #111;
 }
 
+        .admin-form-block {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 40px;
+            border-radius: 4px;
+        }
+        .admin-form-group {
+            margin-bottom: 15px;
+        }
+        .admin-form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .admin-form-group input[type="text"],
+        .admin-form-group textarea,
+        .admin-form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn-admin {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .btn-update { background-color: #28a745; color: white; }
+        .btn-delete { background-color: #dc3545; color: white; }
+        .btn-update:hover { background-color: #218838; }
+        .btn-delete:hover { background-color: #c82333; }
+
 
 /* --- RESPONZIVNOST --- */
 @media (max-width: 768px) {

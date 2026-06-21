@@ -77,15 +77,15 @@ mysqli_close($dbc);
         </div>
     </header>
 
-    <nav class="main-nav">
-        <ul>
-            <li><a href="index.html">POČETNA</a></li>
-            <li><a href="#">ZG VIJESTI</a></li>
-            <li><a href="#">ZG-SPORT</a></li>
-            <li><a href="#">KULTURA & ĐIR</a></li>
-            <li><a href="unos.html">ADMINISTRACIJA</a></li>
-        </ul>
-    </nav>
+<nav class="main-nav">
+    <ul>
+        <li><a href="index.php">POČETNA</a></li>
+        <li><a href="kategorija.php?id=vijesti">ZG VIJESTI</a></li>
+        <li><a href="kategorija.php?id=sport">ZG-SPORT</a></li>
+        <li><a href="kategorija.php?id=kultura">KULTURA & ĐIR</a></li>
+        <li><a href="administrator.php">ADMINISTRACIJA</a></li>
+    </ul>
+</nav>
 
     <main class="container">
         <section role="main">

@@ -54,7 +54,7 @@ Projekt možete preuzeti na jedan od dva načina:
 1. Otvorite svoj web preglednik.
 2. U adresnu traku upišite sljedeći URL:
    ```
-   http://localhost/zg-price/index.php
+   http://localhost/zg-price
    ```
    *(Ako ste mapu u htdocs nazvali drugačije, prilagodite zadnji dio URL-a).*
 3. Web stranica **Zg-Priče** trebala bi se uspješno učitati i prikazati najnovije vijesti iz Zagreba!

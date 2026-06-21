@@ -2,26 +2,42 @@
 // 1. Uključivanje skripte za spajanje na bazu podataka
 include 'connect.php';
 
-// 2. Provjera je li proslijeđen ID preko URL-a i je li brojčan
-if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+// 2. Provjera je li proslijeđen ID preko URL-a
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
     
-    // Dohvaćanje točno određene vijesti prema ID-ju
-    $query = "SELECT * FROM vijesti WHERE id = $id";
-    $result = mysqli_query($dbc, $query);
+    // Inicijalizacija objekta pripremljenog upita
+    $stmt = mysqli_stmt_init($dbc);
     
-    // Provjera postoji li vijest s tim ID-jem u bazi
-    if (mysqli_num_rows($result) == 1) {
-        $row = mysqli_fetch_array($result);
+    // Priprema upita s upitnikom (?) kao zamjenskim parametrom
+    $query = "SELECT naslov, kategorija, sazetak, tekst, slika FROM vijesti WHERE id = ?";
+    
+    if (mysqli_stmt_prepare($stmt, $query)) {
+        // Povezivanje parametara (i = integer)
+        mysqli_stmt_bind_param($stmt, "i", $id);
         
-        $title = $row['naslov'];
-        $category = $row['kategorija'];
-        $about = $row['sazetak'];
-        $content = $row['tekst'];
-        $image = $row['slika'];
+        // Izvršavanje upita
+        mysqli_stmt_execute($stmt);
+        
+        // Pohrana rezultata kako bismo mogli koristiti funkciju mysqli_stmt_num_rows()
+        mysqli_stmt_store_result($stmt);
+        
+        // Provjera postoji li točno jedna vijest s tim ID-jem u bazi
+        if (mysqli_stmt_num_rows($stmt) == 1) {
+            // Vezanje stupaca iz rezultata za lokalne varijable
+            mysqli_stmt_bind_result($stmt, $title, $category, $about, $content, $image);
+            
+            // Dohvaćanje (čitanje) vrijednosti
+            mysqli_stmt_fetch($stmt);
+        } else {
+            // Ako ID ne postoji u bazi
+            $error_message = "Tražena vijest ne postoji u bazi podataka.";
+        }
+        
+        // Zatvaranje pripremljenog upita
+        mysqli_stmt_close($stmt);
     } else {
-        // Ako ID ne postoji u bazi
-        $error_message = "Tražena vijest ne postoji u bazi podataka.";
+        $error_message = "Došlo je do pogreške prilikom komunikacije s bazom.";
     }
 } else {
     // Ako u URL-u uopće nema parametra ?id=
@@ -92,7 +108,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     </main>
 
     <?php
-    // Zatvaranje veze s bazom podataka
+    // Zatvaranje veze s bazom podataka na samom kraju
     mysqli_close($dbc);
     ?>
 

@@ -27,7 +27,7 @@ if (isset($_POST['category'])) {
     $category = "vijesti";
 }
 
-// ISPRAVLJENO: Ispravan prihvat i spremanje datoteke (slike) na server
+// Ispravan prihvat i spremanje datoteke (slike) na server
 if (isset($_FILES['pphoto']) && $_FILES['pphoto']['error'] == 0) {
     $image = $_FILES['pphoto']['name']; // Uzimamo naziv slike (npr. slika.jpg)
     $target = "img/" . basename($image); // Putanja do mape na serveru
@@ -47,18 +47,43 @@ if (isset($_POST['archive'])) {
     $archive_text = "Ne, vijest je javna.";
 }
 
-// SPREMANJE PODATAKA U BAZU PODATAKA
-// Automatski koristimo varijablu $dbc koja je definirana unutar 'connect.php'
+// ==========================================
+// IMPLEMENTACIJA PREPARED STATEMENTA (SIGURAN UPIS)
+// ==========================================
+
+// 1. Defoniranje SQL upita s upitnicima (?) kao placeholderima
 $query = "INSERT INTO vijesti (naslov, sazetak, tekst, slika, kategorija, arhiva) 
-          VALUES ('$title', '$about', '$content', '$image', '$category', '$archive_db')";
+          VALUES (?, ?, ?, ?, ?, ?)";
 
-$result = mysqli_query($dbc, $query);
+// 2. Inicijalizacija objekta upita (mysqli_stmt_init)
+$stmt = mysqli_stmt_init($dbc);
 
-if (!$result) {
-    echo "Došlo je do pogreške prilikom upisa vijesti u bazu podataka: " . mysqli_error($dbc);
+// 3. Priprema upita na poslužitelju (mysqli_stmt_prepare)
+if (mysqli_stmt_prepare($stmt, $query)) {
+    
+    /* 4. Povezivanje parametara (mysqli_stmt_bind_param)
+       Tipovi podataka: 
+       s = string (naslov, sazetak, tekst, slika, kategorija)
+       i = integer (archive_db)
+       Ukupno: 5 stringova i 1 integer -> "sssssi"
+    */
+    mysqli_stmt_bind_param($stmt, "sssssi", $title, $about, $content, $image, $category, $archive_db);
+    
+    // 5. Izvršavanje upita (mysqli_stmt_execute)
+    $result = mysqli_stmt_execute($stmt);
+    
+    if (!$result) {
+        echo "Došlo je do pogreške prilikom izvršavanja upita: " . mysqli_stmt_error($stmt);
+    }
+    
+    // Zatvaranje statementa nakon izvršavanja
+    mysqli_stmt_close($stmt);
+    
+} else {
+    echo "Došlo je do pogreške prilikom pripreme upita: " . mysqli_error($dbc);
 }
 
-// Zatvaranje veze s bazom nakon obavljenog upita
+// Zatvaranje veze s bazom podataka
 mysqli_close($dbc);
 ?>
 <!DOCTYPE html>
@@ -98,7 +123,7 @@ mysqli_close($dbc);
             </div>
             
             <section class="slika">
-                <?php echo "<img src='img/" . htmlspecialchars($image) . "' alt='Slika članka'>"; ?>
+                <img src="img/<?php echo htmlspecialchars($image); ?>" alt="Slika članka">
             </section>
             
             <section class="about">
@@ -118,7 +143,7 @@ mysqli_close($dbc);
         <div class="footer-bottom">
             <p>Autor: Bruno Miličević | E-mail: <a href="mailto:bmilicev1@tvz.hr">bmilicev1@tvz.hr</a> | Godina: 2026.</p>
         </div>
-    </footer >
+    </footer>
 
 </body>
 </html>

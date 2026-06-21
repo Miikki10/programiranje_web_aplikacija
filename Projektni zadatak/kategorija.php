@@ -4,7 +4,8 @@ include 'connect.php';
 
 // 2. Provjera je li parametar 'id' proslijeđen kroz URL (GET metoda)
 if (isset($_GET['id'])) {
-    $kategorija = mysqli_real_escape_string($dbc, $_GET['id']);
+    // Više nije potreban mysqli_real_escape_string jer koristimo Prepared Statement
+    $kategorija = $_GET['id'];
 } else {
     // Ako parametar nije poslan, preusmjeri na početnu ili postavi zadano
     header("Location: index.php");
@@ -46,26 +47,52 @@ if (isset($_GET['id'])) {
             
             <div class="news-grid">
                 <?php
-                // Dohvaćanje SVIH vijesti iz odabrane kategorije koje NISU arhivirane (bez LIMIT-a)
-                $query = "SELECT * FROM vijesti WHERE arhiva = 0 AND kategorija = '$kategorija' ORDER BY id DESC";
-                $result = mysqli_query($dbc, $query);
+                // Definišemo upit s upitnikom (?) kao placeholderom za parametar
+                $query = "SELECT * FROM vijesti WHERE arhiva = 0 AND kategorija = ? ORDER BY id DESC";
                 
-                if (mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_array($result)) {
-                        echo '<article class="news-card">';
-                        echo '  <div class="card-image">';
-                        echo '      <img src="img/' . htmlspecialchars($row['slika']) . '" alt="' . htmlspecialchars($row['naslov']) . '">';
-                        echo '  </div>';
-                        echo '  <div class="card-content">';
-                        echo '      <span class="card-tag tag-' . htmlspecialchars($kategorija) . '">' . htmlspecialchars($row['sazetak']) . '</span>';
-                        echo '      <h3 class="card-heading">';
-                        echo '          <a href="vijest.php?id=' . $row['id'] . '">' . htmlspecialchars($row['naslov']) . '</a>';
-                        echo '      </h3>';
-                        echo '  </div>';
-                        echo '</article>';
+                // 1. Inicijalizacija objekta deklaracije
+                $stmt = mysqli_stmt_init($dbc);
+                
+                // 2. Priprema upita
+                if (mysqli_stmt_prepare($stmt, $query)) {
+                    
+                    // 3. Povezivanje parametara ("s" označava tip 'string')
+                    mysqli_stmt_bind_param($stmt, "s", $kategorija);
+                    
+                    // 4. Izvršavanje upita
+                    mysqli_stmt_execute($stmt);
+                    
+                    // Važno: Pohranjivanje rezultata u međuspremnik kako bi funkcija mysqli_stmt_num_rows ispravno radila
+                    mysqli_stmt_store_result($stmt);
+                    
+                    // Provjera broja redaka pomoću mysqli_stmt_num_rows()
+                    if (mysqli_stmt_num_rows($stmt) > 0) {
+                        
+                        // Za dohvaćanje podataka iz prepared statementa koristimo mysqli_stmt_get_result
+                        $result = mysqli_stmt_get_result($stmt);
+                        
+                        while ($row = mysqli_fetch_array($result)) {
+                            echo '<article class="news-card">';
+                            echo '  <div class="card-image">';
+                            echo '      <img src="img/' . htmlspecialchars($row['slika']) . '" alt="' . htmlspecialchars($row['naslov']) . '">';
+                            echo '  </div>';
+                            echo '  <div class="card-content">';
+                            echo '      <span class="card-tag tag-' . htmlspecialchars($kategorija) . '">' . htmlspecialchars($row['sazetak']) . '</span>';
+                            echo '      <h3 class="card-heading">';
+                            echo '          <a href="vijest.php?id=' . $row['id'] . '">' . htmlspecialchars($row['naslov']) . '</a>';
+                            echo '      </h3>';
+                            echo '  </div>';
+                            echo '</article>';
+                        }
+                    } else {
+                        echo '<p style="padding-left: 15px;">Trenutno nema objavljenih vijesti u kategoriji "' . htmlspecialchars($kategorija) . '".</p>';
                     }
+                    
+                    // Zatvaranje statementa nakon korištenja
+                    mysqli_stmt_close($stmt);
+                    
                 } else {
-                    echo '<p style="padding-left: 15px;">Trenutno nema objavljenih vijesti u kategoriji "' . htmlspecialchars($kategorija) . '".</p>';
+                    echo '<p style="padding-left: 15px;">Došlo je do pogreške prilikom komunikacije s bazom podataka.</p>';
                 }
                 ?>
             </div>

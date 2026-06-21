@@ -212,6 +212,7 @@ if ($is_logged_in && $is_admin) {
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; background: #e2e3e5; padding: 12px 20px; border-radius: 4px; border: 1px solid #d6d8db;">
                 <span>Dobrodošli natrag, administrator <strong><?php echo htmlspecialchars($_SESSION['ime']); ?></strong>!</span>
                 <div>
+                    <a href="korisnici.php" style="background-color: #17a2b8; color: white; padding: 5px 12px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.9em; margin-right: 10px;">Upravljanje korisnicima</a>
                     <a href="unos.php" style="background-color: #007bff; color: white; padding: 5px 12px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.9em; margin-right: 10px;">Unos nove vijesti</a>
                     <a href="administrator.php?action=logout" style="background-color: #6c757d; color: white; padding: 5px 12px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.9em;">Odjava</a>
                 </div>

@@ -4,7 +4,6 @@ include 'connect.php';
 
 // 2. Provjera je li parametar 'id' proslijeđen kroz URL (GET metoda)
 if (isset($_GET['id'])) {
-    // Više nije potreban mysqli_real_escape_string jer koristimo Prepared Statement
     $kategorija = $_GET['id'];
 } else {
     // Ako parametar nije poslan, preusmjeri na početnu ili postavi zadano
@@ -47,29 +46,20 @@ if (isset($_GET['id'])) {
             
             <div class="news-grid">
                 <?php
-                // Definišemo upit s upitnikom (?) kao placeholderom za parametar
                 $query = "SELECT * FROM vijesti WHERE arhiva = 0 AND kategorija = ? ORDER BY id DESC";
                 
-                // 1. Inicijalizacija objekta deklaracije
                 $stmt = mysqli_stmt_init($dbc);
                 
-                // 2. Priprema upita
                 if (mysqli_stmt_prepare($stmt, $query)) {
                     
-                    // 3. Povezivanje parametara ("s" označava tip 'string')
                     mysqli_stmt_bind_param($stmt, "s", $kategorija);
-                    
-                    // 4. Izvršavanje upita
                     mysqli_stmt_execute($stmt);
                     
-                    // Važno: Pohranjivanje rezultata u međuspremnik kako bi funkcija mysqli_stmt_num_rows ispravno radila
-                    mysqli_stmt_store_result($stmt);
+                    // POPRAVAK: Umjesto store_result pa get_result, odmah uzimamo kompletan rezultat objekta
+                    $result = mysqli_stmt_get_result($stmt);
                     
-                    // Provjera broja redaka pomoću mysqli_stmt_num_rows()
-                    if (mysqli_stmt_num_rows($stmt) > 0) {
-                        
-                        // Za dohvaćanje podataka iz prepared statementa koristimo mysqli_stmt_get_result
-                        $result = mysqli_stmt_get_result($stmt);
+                    // Broj redaka sada provjeravamo izravno na $result objektu pomoću mysqli_num_rows()
+                    if (mysqli_num_rows($result) > 0) {
                         
                         while ($row = mysqli_fetch_array($result)) {
                             echo '<article class="news-card">';
@@ -79,7 +69,8 @@ if (isset($_GET['id'])) {
                             echo '  <div class="card-content">';
                             echo '      <span class="card-tag tag-' . htmlspecialchars($kategorija) . '">' . htmlspecialchars($row['sazetak']) . '</span>';
                             echo '      <h3 class="card-heading">';
-                            echo '          <a href="vijest.php?id=' . $row['id'] . '">' . htmlspecialchars($row['naslov']) . '</a>';
+                            // PROMIJENJENO: clanak.php umjesto vijest.php
+                            echo '          <a href="clanak.php?id=' . $row['id'] . '">' . htmlspecialchars($row['naslov']) . '</a>';
                             echo '      </h3>';
                             echo '  </div>';
                             echo '</article>';

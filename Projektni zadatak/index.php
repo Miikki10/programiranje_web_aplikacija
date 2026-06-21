@@ -1,6 +1,12 @@
 <?php
+session_start();
+
 // 1. Uključivanje skripte za spajanje na bazu podataka
 include 'connect.php';
+
+// Popravljeni session ključevi (maknut znak $ unutar navodnika)
+$korisnik_prijavljen = isset($_SESSION['username']);
+$razina_prava = isset($_SESSION['level']) ? $_SESSION['level'] : 0;
 ?>
 <!DOCTYPE html>
 <html lang="hr">
@@ -18,26 +24,25 @@ include 'connect.php';
         </div>
     </header>
 
-<nav class="main-nav">
-    <ul>
-        <li><a href="index.php">POČETNA</a></li>
-        <li><a href="kategorija.php?id=vijesti">ZG VIJESTI</a></li>
-        <li><a href="kategorija.php?id=sport">ZG-SPORT</a></li>
-        <li><a href="kategorija.php?id=kultura">KULTURA & ĐIR</a></li>
-        <li><a href="administrator.php">ADMINISTRACIJA</a></li>
-    </ul>
-</nav>
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.php">POČETNA</a></li>
+            <li><a href="kategorija.php?id=vijesti">ZG VIJESTI</a></li>
+            <li><a href="kategorija.php?id=sport">ZG-SPORT</a></li>
+            <li><a href="kategorija.php?id=kultura">KULTURA & ĐIR</a></li>
+            <li><a href="administrator.php">ADMINISTRACIJA</a></li>
+        </ul>
+    </nav>
 
     <main class="container">
         
         <section class="news-section">
             <h2 class="section-title title-vijesti">
-                <a href="#">ZG VIJESTI &rsaquo;</a>
+                <a href="kategorija.php?id=vijesti">ZG VIJESTI &rsaquo;</a>
             </h2>
             
             <div class="news-grid">
                 <?php
-                // Dohvaćanje vijesti iz kategorije 'vijesti' koje NISU arhivirane, poredane od najnovije
                 $query_vijesti = "SELECT * FROM vijesti WHERE arhiva = 0 AND kategorija = 'vijesti' ORDER BY id DESC";
                 $result_vijesti = mysqli_query($dbc, $query_vijesti);
                 
@@ -50,7 +55,8 @@ include 'connect.php';
                         echo '  <div class="card-content">';
                         echo '      <span class="card-tag tag-vijesti">' . htmlspecialchars($row['sazetak']) . '</span>';
                         echo '      <h3 class="card-heading">';
-                        echo '          <a href="vijest.php?id=' . $row['id'] . '">' . htmlspecialchars($row['naslov']) . '</a>';
+                        // PROMIJENJENO: clanak.php umjesto vijest.php
+                        echo '          <a href="clanak.php?id=' . $row['id'] . '">' . htmlspecialchars($row['naslov']) . '</a>';
                         echo '      </h3>';
                         echo '  </div>';
                         echo '</article>';
@@ -64,12 +70,11 @@ include 'connect.php';
 
         <section class="news-section">
             <h2 class="section-title title-sport">
-                <a href="#">ZG-SPORT &rsaquo;</a>
+                <a href="kategorija.php?id=sport">ZG-SPORT &rsaquo;</a>
             </h2>
             
             <div class="news-grid">
                 <?php
-                // Dohvaćanje vijesti iz kategorije 'sport' koje NISU arhivirane
                 $query_sport = "SELECT * FROM vijesti WHERE arhiva = 0 AND kategorija = 'sport' ORDER BY id DESC";
                 $result_sport = mysqli_query($dbc, $query_sport);
                 
@@ -82,7 +87,8 @@ include 'connect.php';
                         echo '  <div class="card-content">';
                         echo '      <span class="card-tag tag-sport">' . htmlspecialchars($row['sazetak']) . '</span>';
                         echo '      <h3 class="card-heading">';
-                        echo '          <a href="vijest.php?id=' . $row['id'] . '">' . htmlspecialchars($row['naslov']) . '</a>';
+                        // PROMIJENJENO: clanak.php umjesto vijest.php
+                        echo '          <a href="clanak.php?id=' . $row['id'] . '">' . htmlspecialchars($row['naslov']) . '</a>';
                         echo '      </h3>';
                         echo '  </div>';
                         echo '</article>';
@@ -95,13 +101,12 @@ include 'connect.php';
         </section>
 
         <section class="news-section">
-            <h2 class="section-title title-kultur">
-                <a href="#">KULTURA & ĐIR</a>
+            <h2 class="section-title title-kultura">
+                <a href="kategorija.php?id=kultura">KULTURA & ĐIR</a>
             </h2>
             
             <div class="news-grid">
                 <?php
-                // Dohvaćanje vijesti iz kategorije 'kultura' koje NISU arhivirane
                 $query_kultura = "SELECT * FROM vijesti WHERE arhiva = 0 AND kategorija = 'kultura' ORDER BY id DESC";
                 $result_kultura = mysqli_query($dbc, $query_kultura);
                 
@@ -112,9 +117,10 @@ include 'connect.php';
                         echo '      <img src="img/' . htmlspecialchars($row['slika']) . '" alt="' . htmlspecialchars($row['naslov']) . '">';
                         echo '  </div>';
                         echo '  <div class="card-content">';
-                        echo '      <span class="card-tag tag-kultur">' . htmlspecialchars($row['sazetak']) . '</span>';
+                        echo '      <span class="card-tag tag-kultura">' . htmlspecialchars($row['sazetak']) . '</span>';
                         echo '      <h3 class="card-heading">';
-                        echo '          <a href="vijest.php?id=' . $row['id'] . '">' . htmlspecialchars($row['naslov']) . '</a>';
+                        // PROMIJENJENO: clanak.php umjesto vijest.php
+                        echo '          <a href="clanak.php?id=' . $row['id'] . '">' . htmlspecialchars($row['naslov']) . '</a>';
                         echo '      </h3>';
                         echo '  </div>';
                         echo '</article>';
@@ -129,7 +135,7 @@ include 'connect.php';
     </main>
 
     <?php
-    // Zatvaranje veze s bazom podataka na samom kraju stranice
+    // Zatvaranje veze s bazom podataka
     mysqli_close($dbc);
     ?>
 

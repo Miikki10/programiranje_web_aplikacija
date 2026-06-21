@@ -191,6 +191,11 @@ if ($is_logged_in && $is_admin) {
                         <input type="password" name="password" required style="width: 100%; padding: 8px; box-sizing: border-box;">
                     </div>
                     <button type="submit" name="login" style="background-color: #28a745; color: white; border: none; padding: 10px; cursor: pointer; font-weight: bold; width: 100%;">Prijava</button>
+                    
+                    <div style="margin-top: 20px; text-align: center; border-top: 1px solid #eee; padding-top: 15px; font-size: 0.95em;">
+                        Nemate korisnički račun? 
+                        <a href="registracija.php" style="color: #007bff; text-decoration: none; font-weight: bold;">Registrirajte se ovdje</a>
+                    </div>
                 </form>
             </section>
 
@@ -206,7 +211,10 @@ if ($is_logged_in && $is_admin) {
         <?php else: ?>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; background: #e2e3e5; padding: 12px 20px; border-radius: 4px; border: 1px solid #d6d8db;">
                 <span>Dobrodošli natrag, administrator <strong><?php echo htmlspecialchars($_SESSION['ime']); ?></strong>!</span>
-                <a href="administrator.php?action=logout" style="background-color: #6c757d; color: white; padding: 5px 12px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.9em;">Odjava</a>
+                <div>
+                    <a href="unos.php" style="background-color: #007bff; color: white; padding: 5px 12px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.9em; margin-right: 10px;">Unos nove vijesti</a>
+                    <a href="administrator.php?action=logout" style="background-color: #6c757d; color: white; padding: 5px 12px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.9em;">Odjava</a>
+                </div>
             </div>
 
             <h1 style="margin-bottom: 30px; text-align: center;">Upravljanje vijestima (Administracija)</h1>

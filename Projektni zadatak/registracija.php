@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Provjera postoji li već korisnik s istim korisničkim imenom
         $sql_check = "SELECT korisnicko_ime FROM korisnik WHERE korisnicko_ime = ?";
         $stmt_check = mysqli_prepare($dbc, $sql_check);
-        mysqli_stmt_bind_param($stmt_check, "s", $korisnicko_ime);
+        $mysqli_bind = mysqli_stmt_bind_param($stmt_check, "s", $korisnicko_ime);
         mysqli_stmt_execute($stmt_check);
         mysqli_stmt_store_result($stmt_check);
 
@@ -126,7 +126,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="password" name="lozinka_potvrda" required style="width: 100%; padding: 8px; box-sizing: border-box;">
                 </div>
 
-                <button type="submit" style="background-color: #0056b3; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; width: 100%;">Registriraj se</button>
+                <button type="submit" style="background-color: #0056b3; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; width: 100%; margin-bottom: 15px;">Registriraj se</button>
+                
+                <div class="login-redirect" style="text-align: center; margin-top: 15px; font-size: 14px;">
+                    Već imate račun? <a href="administrator.php" style="color: #0056b3; font-weight: bold; text-decoration: underline;">Prijavi se</a>
+                </div>
             </form>
         </section>
     </main>

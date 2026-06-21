@@ -16,6 +16,7 @@
 
     <nav class="main-nav">
         <ul>
+            <li><a href="administrator.php" style="font-weight: bold; color: #005cbf;">← POVRATAK NA ADMINISTRACIJSKU PLOČU</a></li>
             <li><a href="index.php">POČETNA</a></li>
             <li><a href="#">ZG VIJESTI</a></li>
             <li><a href="#">ZG-SPORT</a></li>

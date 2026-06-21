@@ -38,10 +38,10 @@ Projekt možete preuzeti na jedan od dva načina:
 ### Korak 4: Uvoz baze podataka (phpMyAdmin)
 1. Otvorite web preglednik i idite na adresu: [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
 2. S lijeve strane kliknite na **New** kako biste kreirali novu bazu podataka.
-3. Nazovite bazu podataka **`zg_price`** (ili provjerite točan naziv u konfiguracijskoj PHP datoteci koda) i kliknite **Create**.
+3. Nazovite bazu podataka **`zg_price`** i kliknite **Create**.
 4. Odaberite novoizrađenu bazu podataka s popisa, a zatim u gornjem izborniku kliknite na karticu **Import**.
 5. Kliknite na gumb **Choose File** (Odaberi datoteku).
-6. Navigirajte do direktorija vašeg preuzetog projekta, uđite u mapu baze podataka i odaberite datoteku **`zg-price.sql`**.
+6. Navigirajte do direktorija vašeg preuzetog projekta, uđite u mapu baze podataka i odaberite datoteku **`zg_price.sql`**.
 7. Skrolajte do dna stranice i kliknite na gumb **Import** (ili **Go**). Pričekajte poruku o uspješnom uvozu svih tablica.
 
 ### Korak 5: Prebacivanje datoteka u `htdocs`
@@ -54,7 +54,7 @@ Projekt možete preuzeti na jedan od dva načina:
 1. Otvorite svoj web preglednik.
 2. U adresnu traku upišite sljedeći URL:
    ```
-   http://localhost/zg-price/
+   http://localhost/zg-price/index.php
    ```
    *(Ako ste mapu u htdocs nazvali drugačije, prilagodite zadnji dio URL-a).*
 3. Web stranica **Zg-Priče** trebala bi se uspješno učitati i prikazati najnovije vijesti iz Zagreba!
